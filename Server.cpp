@@ -10,6 +10,8 @@ using namespace std;
 int main()
 {
 	WSADATA wsaData;
+	const int server_port = 8080;
+
 	int iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
 	if (iResult != 0) {
 		cout << "WSAStartup failed: " << iResult << endl;
@@ -26,7 +28,7 @@ int main()
 	sockaddr_in localAddr;
 	localAddr.sin_family = AF_INET;
 	localAddr.sin_addr.s_addr = INADDR_ANY;
-	localAddr.sin_port = htons(27015);
+	localAddr.sin_port = htons(server_port);
 	iResult = bind(listenSocket, (sockaddr*)&localAddr, sizeof(localAddr));
 	if (iResult == SOCKET_ERROR) {
 		cout << "bind failed: " << WSAGetLastError() << endl;
